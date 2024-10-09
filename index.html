@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batch10 Assignment6 Solution</title>
+    <!-- daisyUI and tailwind css cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.12/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- font family cdn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- css connect -->
+    <link rel="stylesheet" href="style.css">
+    <!-- css style -->
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        #spinner {
+            display: none;
+
+        }
+        .active{
+        background-color:rgba(14, 122, 129, 0.1);
+    
+        }
+    </style>
+</head>
+
+<body>
+    <header class="w-11/12 lg:w-10/12 mx-auto">
+        <!-- navbar design start -->
+        <nav class="">
+            <div class="navbar flex justify-between items-center">
+                <div class=" space-x-1">
+                    <img src="./images/logo.webp">
+                  <h2 class=" text-2xl font-bold"> Peddy</h2>
+                </div>
+                <div class=" hidden md:flex">
+                  <ul class="menu menu-horizontal text-[16px] font-medium mr-10">
+                      <li class=""><a href="#">Home</a></li>
+                      <li><a href="#">Shop</a></li>
+                      <li><a href="#">Contact</a></li>
+                  </ul>
+                </div>
+                <div class=" gap-5 hidden md:flex">
+                    <div class="w-8 h-8 border rounded-full bg-[#FFFFFF] flex justify-center items-center">
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+                </div>
+                <div class="dropdown md:hidden">
+                    <div tabindex="0" role="button" class="btn btn-ghost " >
+                        <i class="fa-solid fa-bars text-xl w-8 h-8 bg-[#E9E9E9] rounded-full flex justify-center items-center text-font_color"></i>
+                    </div>
+                    <ul
+                     tabindex="0"
+                      class="menu menu-sm dropdown-content  rounded-box z-[1] mt-3 w-28 p-2 mr-10 shadow text-[#494949] font-bold right-0">
+                      <li class=""><a href="#">Home</a></li>
+                      <li><a href="#">Shop</a></li>
+                      <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                  
+            </div>
+        </nav>
+        <!-- nav design end -->
+    </header>
+
+    <main class="w-11/12 lg:w-10/12  mx-auto">
+        <!-- banner section design start -->
+        <section class="flex flex-col justify-center items-center mt-10 mb-10 ">
+            <div class="text-center space-y-5 ">
+                <h1 class="text-3xl font-extrabold text-[#131313] leading-10"><span
+                        class="text-sm font-semibold text-[#13131399]">Bringing Families Together ❤️‍🔥</span> <br>
+                    Your Path to Adoption <br> Starts Here</h1>
+                <p class="text-sm font-medium text-gray-500">You are going to step into the realm of love and companionship. You may be looking for a puppy, soft-spoken kitten. <br>Every animal is ready to take place in your life. Starts the process now.</p>
+            </div>
+            <div class="mt-6 mb-4">
+                <button id="viewBtn" class="text-sm font-medium  px-3 py-2 rounded-lg bg-[#0E7A81] text-white hover:bg-gray-300 hover:text-black hover:font-bold">View
+                    More</button>
+            </div>
+            <div>
+                <img src="./images/pet.webp" alt="">
+            </div>
+        </section>
+        <!-- banner section design end -->
+
+        <!-- best friend section design start -->
+        <section id="adoptBestFriend" class="mt-10 mb-20">
+            <!-- section title -->
+            <div class="text-center space-y-3">
+                <h2 class="text-xl font-extrabold">Adopt Your Best Friend</h2>
+                <p class="text-sm font-medium text-gray-500">When you bring a pet, you don't just get a companion-you get a close friend, who will always be by your side. They love unconditionally,<br> give pleasure, create a bond of love, which grows stronger with time.</p>
+            </div>
+
+            <!-- All categories button -->
+            <div id="displayBtnContainer" class="mt-8 flex justify-between items-center flex-wrap  gap-2">
+
+            </div>
+
+            <!-- sort price and deal -->
+            <div class="mt-6 flex justify-between">
+                <h3 class="text-lg font-semibold">Best Deal For you</h3>
+                <button onclick="descendingSort()" class=" text-sm font-bold  px-3 py-2 rounded-lg bg-[#0E7A81] text-white hover:bg-gray-300 hover:text-black">Sort by
+                    Price</button>
+            </div>
+
+            <!-- spinner -->
+            <div class="flex justify-center"><span id="spinner" class=" loading loading-bars loading-md"></span>
+            </div>
+
+            <!-- all categories pets here -->
+            <div class="mt-10 md:flex gap-2">
+                <!-- left side -->
+                <div id="petCardContainer" class="md:w-[75%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 ">
+
+                </div>
+                <!-- right side -->
+                <div id="image-container"
+                    class="border-2 rounded-md md:w-[25%] grid grid-flow-row auto-rows-max grid-cols-2">
+
+                </div>
+            </div>
+        </section>
+        <!-- best friend section design end -->
+
+    </main>
+
+
+    <!-- Open the modal using ID.showModal() method -->
+    <button class="btn hidden" onclick="customModal.showModal()">open modal</button>
+    <dialog id="customModal" class=" modal sm:modal-middle">
+        <div class="modal-box">
+            <div id="modal-content">
+
+            </div>
+            <div class="mt-3">
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="bg-[#0E7A8133] text-[#0E7A81] w-full py-2 rounded-lg font-semibold">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Open the modal using ID.showModal() method -->
+    <button class="btn hidden" onclick="adoptModal.showModal()">open modal</button>
+    <dialog id="adoptModal" class="w-[250px] h-[250px] rounded-lg">
+        <div id="adopt-content" class="">
+        </div>
+    </dialog>
+
+
+    <!-- footer part start -->
+    <footer class="bg-[#131313] ">
+        <section class="w-11/12 lg:w-10/12 mx-auto md:flex md:justify-between space-y-8  py-10 ">
+            <!-- left side -->
+
+            <div>
+                <div class="flex items-center gap-2 mb-3">
+                    <img class="w-[20px] h-[20px]" src="./images/logo.webp" alt="coming logo">
+                    <h2 class="text-2xl font-bold text-white">Peddy</h2>
+                </div>
+                <div>
+                    <p class=" text-white text-sm">
+                        Location: av. Washington 165, NY CA 54003<br>
+                        Phone: +31 85 964 47 25<br>
+                        Email: info@yourdomain.com<br>
+                        Openings hours: 9.00 AM - 5.00 PM
+                    </p>
+                </div>
+                <div class="flex gap-4 mt-3">
+                    <a href=""><i class="fa-brands fa-facebook text-white"></i></a>
+                    <a href=""><i class="fa-brands fa-youtube text-[#FF0000]"></i></a>
+                    <a href=""><i class="fa-brands fa-instagram text-[#8C3AAA]"></i></a>
+                    <a href=""><i class="fa-brands fa-linkedin text-white"></i></a>
+                </div>
+            </div>
+
+            <!-- middle side -->
+            <div>
+                <p class="text-white font-semibold mb-3">Useful Links</p>
+                <a class="text-white text-sm" href="">Home</a><br>
+                <a class="text-white text-sm" href="">About Us</a><br>
+                <a class="text-white text-sm" href="">Animals</a><br>
+                <a class="text-white text-sm" href="">Foundation</a><br>
+                <a class="text-white text-sm" href="">Contact</a>
+            </div>
+            <!-- right side -->
+            <div>
+                <p class="text-white font-semibold mb-3">Drop a Message</p>
+                <input class="bg-[#FFFFFF0D] text-sm px-3 py-2 rounded-lg text-gray-400" type="text"
+                    placeholder="Enter your email"><br>
+                <button class="bg-[#0E7A81] px-14 py-1 rounded-lg mt-2 text-white">Subscribe</button>
+            </div>
+        </section>
+        <section>
+            <h1>hello</h1>
+        </section>
+    </footer>
+
+
+    <script src="index.js"></script>
+</body>
+
+</html>
